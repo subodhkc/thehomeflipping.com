@@ -1,0 +1,316 @@
+{
+  "keywords": [
+    {
+      "keyword": "how to flip houses for beginners",
+      "searchVolume": 6600,
+      "difficulty": 45,
+      "intent": "informational",
+      "pillar": "getting-started",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "keyword": "house flipping checklist",
+      "searchVolume": 880,
+      "difficulty": 35,
+      "intent": "commercial",
+      "pillar": "getting-started",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "keyword": "how to calculate arv",
+      "searchVolume": 590,
+      "difficulty": 30,
+      "intent": "informational",
+      "pillar": "financials",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "keyword": "house flipping spreadsheet",
+      "searchVolume": 1300,
+      "difficulty": 40,
+      "intent": "commercial",
+      "pillar": "tools",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "keyword": "70 percent rule house flipping",
+      "searchVolume": 720,
+      "difficulty": 25,
+      "intent": "informational",
+      "pillar": "financials",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "keyword": "is house flipping worth it",
+      "searchVolume": 1600,
+      "difficulty": 35,
+      "intent": "informational",
+      "pillar": "getting-started",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "keyword": "house flipping profit calculator",
+      "searchVolume": 480,
+      "difficulty": 30,
+      "intent": "commercial",
+      "pillar": "financials",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "keyword": "how to find houses to flip",
+      "searchVolume": 1200,
+      "difficulty": 40,
+      "intent": "informational",
+      "pillar": "finding-deals",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "keyword": "house flipping with no money",
+      "searchVolume": 2400,
+      "difficulty": 50,
+      "intent": "informational",
+      "pillar": "financing",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "keyword": "house flipping business plan",
+      "searchVolume": 720,
+      "difficulty": 35,
+      "intent": "commercial",
+      "pillar": "business",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "keyword": "best renovations for house flipping",
+      "searchVolume": 590,
+      "difficulty": 30,
+      "intent": "informational",
+      "pillar": "renovation",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "keyword": "house flipping rehab costs",
+      "searchVolume": 480,
+      "difficulty": 25,
+      "intent": "informational",
+      "pillar": "financials",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "keyword": "how much money to flip a house",
+      "searchVolume": 1900,
+      "difficulty": 40,
+      "intent": "informational",
+      "pillar": "financing",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "keyword": "house flipping taxes",
+      "searchVolume": 880,
+      "difficulty": 35,
+      "intent": "informational",
+      "pillar": "business",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "keyword": "llc for house flipping",
+      "searchVolume": 590,
+      "difficulty": 30,
+      "intent": "informational",
+      "pillar": "business",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "keyword": "hard money lenders for flipping",
+      "searchVolume": 720,
+      "difficulty": 45,
+      "intent": "commercial",
+      "pillar": "financing",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "keyword": "house flipping contractor tips",
+      "searchVolume": 320,
+      "difficulty": 20,
+      "intent": "informational",
+      "pillar": "renovation",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "keyword": "wholesale vs retail house flipping",
+      "searchVolume": 260,
+      "difficulty": 25,
+      "intent": "informational",
+      "pillar": "finding-deals",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "keyword": "house flipping roi expectations",
+      "searchVolume": 210,
+      "difficulty": 20,
+      "intent": "informational",
+      "pillar": "financials",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "keyword": "first time house flipper mistakes",
+      "searchVolume": 390,
+      "difficulty": 25,
+      "intent": "informational",
+      "pillar": "getting-started",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "keyword": "house flipping due diligence checklist",
+      "searchVolume": 170,
+      "difficulty": 15,
+      "intent": "commercial",
+      "pillar": "finding-deals",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "keyword": "arv calculator real estate",
+      "searchVolume": 480,
+      "difficulty": 30,
+      "intent": "commercial",
+      "pillar": "tools",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "keyword": "house flipping timeline",
+      "searchVolume": 320,
+      "difficulty": 20,
+      "intent": "informational",
+      "pillar": "getting-started",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "keyword": "brrrr vs flipping",
+      "searchVolume": 590,
+      "difficulty": 35,
+      "intent": "informational",
+      "pillar": "getting-started",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "keyword": "house flipping exit strategies",
+      "searchVolume": 140,
+      "difficulty": 15,
+      "intent": "informational",
+      "pillar": "business",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "keyword": "foreclosure flipping guide",
+      "searchVolume": 260,
+      "difficulty": 30,
+      "intent": "informational",
+      "pillar": "finding-deals",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "keyword": "house flipping financing options",
+      "searchVolume": 390,
+      "difficulty": 35,
+      "intent": "informational",
+      "pillar": "financing",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "keyword": "mao formula house flipping",
+      "searchVolume": 210,
+      "difficulty": 20,
+      "intent": "informational",
+      "pillar": "financials",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "keyword": "house flipping scope of work template",
+      "searchVolume": 140,
+      "difficulty": 15,
+      "intent": "commercial",
+      "pillar": "tools",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "keyword": "best markets for house flipping 2024",
+      "searchVolume": 480,
+      "difficulty": 40,
+      "intent": "informational",
+      "pillar": "finding-deals",
+      "priority": 2,
+      "status": "pending"
+    }
+  ],
+  "pillars": {
+    "getting-started": {
+      "name": "Getting Started with House Flipping",
+      "description": "Foundational content for beginners",
+      "hubPage": "/guides/house-flipping-beginners-guide"
+    },
+    "financials": {
+      "name": "House Flipping Financials",
+      "description": "ARV, ROI, profit calculations",
+      "hubPage": "/guides/house-flipping-financials"
+    },
+    "finding-deals": {
+      "name": "Finding Flip Properties",
+      "description": "Sourcing and evaluating deals",
+      "hubPage": "/guides/finding-flip-properties"
+    },
+    "renovation": {
+      "name": "Renovation & Rehab",
+      "description": "Managing rehab projects",
+      "hubPage": "/guides/house-flipping-renovation"
+    },
+    "financing": {
+      "name": "Financing Your Flip",
+      "description": "Funding options and strategies",
+      "hubPage": "/guides/house-flipping-financing"
+    },
+    "business": {
+      "name": "House Flipping Business",
+      "description": "Legal, tax, and business structure",
+      "hubPage": "/guides/house-flipping-business"
+    },
+    "tools": {
+      "name": "House Flipping Tools",
+      "description": "Spreadsheets, calculators, templates",
+      "hubPage": "/tools"
+    }
+  },
+  "metadata": {
+    "lastUpdated": "2024-12-27",
+    "totalKeywords": 30,
+    "generatedCount": 0
+  }
+}

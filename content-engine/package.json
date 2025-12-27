@@ -1,0 +1,38 @@
+{
+  "name": "thehomeflipping-content-engine",
+  "version": "1.0.0",
+  "description": "Automated SEO blog content generator for thehomeflipping.com",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "generate": "node src/index.js",
+    "generate:single": "node src/generate-single.js",
+    "schedule": "node src/scheduler.js",
+    "keywords:import": "node src/import-keywords.js",
+    "keywords:analyze": "node src/analyze-keywords.js",
+    "publish": "node src/publisher.js",
+    "test": "node src/test.js"
+  },
+  "dependencies": {
+    "openai": "^4.20.0",
+    "dotenv": "^16.3.1",
+    "gray-matter": "^4.0.3",
+    "slugify": "^1.6.6",
+    "node-cron": "^3.0.3",
+    "csv-parse": "^5.5.2",
+    "simple-git": "^3.21.0",
+    "winston": "^3.11.0",
+    "date-fns": "^2.30.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "keywords": [
+    "seo",
+    "content-generation",
+    "house-flipping",
+    "real-estate"
+  ],
+  "author": "TheHomeFlipping.com",
+  "license": "MIT"
+}
