@@ -4,7 +4,7 @@
 
 Your website now has a complete conversion funnel:
 
-```
+```text
 Awareness → Interest → Exploration → Purchase → Delivery
     ↓          ↓            ↓            ↓          ↓
 Homepage → Calculators → Starter Kit → Checkout → Success
@@ -76,7 +76,7 @@ OPENAI_API_KEY=sk-your_openai_key_here
 
 ### Getting Your Stripe Keys
 
-1. **Create Stripe Account**: https://dashboard.stripe.com/register
+1. **Create Stripe Account**: <https://dashboard.stripe.com/register>
 2. **Create Product**:
    - Go to Products → Add Product
    - Name: "First Flip Starter Kit"
@@ -116,6 +116,7 @@ npm run dev
 ```
 
 Test the checkout flow with Stripe test card:
+
 - Card: `4242 4242 4242 4242`
 - Expiry: Any future date
 - CVC: Any 3 digits
@@ -135,6 +136,7 @@ vercel --prod
 ```
 
 Or use GitHub integration:
+
 1. Push code to GitHub
 2. Import repository in Vercel
 3. Set root directory to `website`
@@ -144,6 +146,7 @@ Or use GitHub integration:
 ### 5. Configure Custom Domain
 
 In Vercel:
+
 1. Go to Settings → Domains
 2. Add `thehomeflipping.com`
 3. Update DNS records as instructed
@@ -164,22 +167,26 @@ In Vercel:
 ## Email & Product Delivery Setup
 
 You'll need to set up automated email delivery for:
+
 1. **Free Checklist** - Send PDF after email capture
 2. **Starter Kit** - Send download link after purchase
 
-### Options:
+### Options
 
 **Option 1: SendGrid** (Recommended)
+
 ```bash
 npm install @sendgrid/mail
 ```
 
 **Option 2: Resend** (Modern alternative)
+
 ```bash
 npm install resend
 ```
 
-**Option 3: Mailgun**
+#### Option 3: Mailgun
+
 ```bash
 npm install mailgun-js
 ```
@@ -189,16 +196,19 @@ npm install mailgun-js
 Your digital products need to be hosted securely:
 
 ### Option 1: Vercel Blob Storage
+
 ```bash
 npm install @vercel/blob
 ```
 
 ### Option 2: AWS S3
+
 - Upload files to S3
 - Generate signed URLs for downloads
 - Set expiration times
 
 ### Option 3: Google Drive
+
 - Upload to Google Drive
 - Create service account
 - Generate download links via API
