@@ -1,8 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+import Stripe from 'stripe'
 
 export async function GET(request: NextRequest) {
+  if (!process.env.STRIPE_SECRET_KEY) {
+    return NextResponse.json(
+      { error: 'Stripe is not configured' },
+      { status: 500 }
+    )
+  }
+
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: '2025-12-15.clover',
+  })
+
   try {
     const searchParams = request.nextUrl.searchParams
     const sessionId = searchParams.get('session_id')
