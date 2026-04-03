@@ -19,6 +19,8 @@ export default function SellFastPage() {
     additionalInfo: '',
   })
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -29,14 +31,34 @@ export default function SellFastPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setLoading(true)
+    setError(null)
     
-    // In production, this would send to your backend/CRM
-    console.log('Form submitted:', formData)
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    setSubmitted(true)
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: 'Sell Fast Property Inquiry',
+          message: `Property Address: ${formData.address}\nCity: ${formData.city}\nState: ${formData.state}\nZip: ${formData.zip}\nAsking Price: ${formData.askingPrice}\nReason for Selling: ${formData.reason}\nProperty Type: ${formData.propertyType}\nBedrooms: ${formData.bedrooms}\nBathrooms: ${formData.bathrooms}\nSquare Feet: ${formData.squareFeet}\nYear Built: ${formData.yearBuilt}\nCondition: ${formData.condition}\nNotes: ${formData.notes}`
+        })
+      })
+      
+      const data = await response.json()
+      
+      if (response.ok) {
+        setSubmitted(true)
+      } else {
+        setError(data.error || 'Failed to submit form')
+      }
+    } catch (err) {
+      setError('Failed to submit. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   if (submitted) {
@@ -376,9 +398,12 @@ export default function SellFastPage() {
                 </div>
 
                 <div className="pt-6 border-t">
-                  <button type="submit" className="btn-primary w-full py-4 text-lg">
-                    Get My Cash Offer <ArrowRight className="inline ml-2 h-5 w-5" />
+                  <button type="submit" className="btn-primary w-full py-4 text-lg disabled:opacity-50" disabled={loading}>
+                    {loading ? 'Submitting...' : 'Get My Cash Offer'} <ArrowRight className="inline ml-2 h-5 w-5" />
                   </button>
+                  {error && (
+                    <p className="text-red-500 text-sm mt-2">{error}</p>
+                  )}
                   <p className="text-sm text-gray-500 text-center mt-4">
                     By submitting this form, you agree to be contacted by cash buyers in our network. 
                     No spam, no obligation.

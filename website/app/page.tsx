@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Calculator, FileText, DollarSign, CheckCircle, ArrowRight, Star, Shield, Clock } from 'lucide-react'
+import { AIVoiceBanner } from '@/components/AIVoiceBanner'
 
 const features = [
   {
@@ -309,6 +310,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* AI Voice Agent Banner */}
+      <AIVoiceBanner />
 
       {/* Urgency CTA Section */}
       <section className="py-16 lg:py-24 bg-gradient-to-br from-primary-900 via-primary-800 to-secondary-900 text-white">

@@ -6,11 +6,34 @@ import { CheckCircle, Download, FileText, ArrowRight, Shield } from 'lucide-reac
 export default function FreeChecklistPage() {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (email) {
-      setSubmitted(true)
+    if (!email) return
+    
+    setLoading(true)
+    setError(null)
+    
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      })
+      
+      const data = await response.json()
+      
+      if (response.ok) {
+        setSubmitted(true)
+      } else {
+        setError(data.error || 'Something went wrong')
+      }
+    } catch (err) {
+      setError('Failed to submit. Please try again.')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -107,9 +130,12 @@ export default function FreeChecklistPage() {
                       className="input-field"
                     />
                   </div>
-                  <button type="submit" className="btn-primary w-full py-4 text-lg">
-                    Download Free Checklist <Download className="inline ml-2 h-5 w-5" />
+                  <button type="submit" className="btn-primary w-full py-4 text-lg disabled:opacity-50" disabled={loading}>
+                    {loading ? 'Sending...' : 'Download Free Checklist'} <Download className="inline ml-2 h-5 w-5" />
                   </button>
+                  {error && (
+                    <p className="text-red-500 text-sm mt-2">{error}</p>
+                  )}
                 </form>
                 
                 <div className="flex items-center gap-2 mt-4 text-sm text-gray-500">
