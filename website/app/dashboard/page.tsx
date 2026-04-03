@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { AlertCircle, Calculator, CheckSquare, TrendingUp, Users, FileText, Download, ArrowRight } from 'lucide-react'
 import { DashboardLayout } from './components/DashboardLayout'
@@ -256,7 +256,7 @@ function OverviewScreen({
   )
 }
 
-export default function DashboardPage() {
+function DashboardContent() {
   const searchParams = useSearchParams()
   const [data, setData] = useState<DashboardData | null>(null)
   const [loading, setLoading] = useState(true)
@@ -358,5 +358,20 @@ export default function DashboardPage() {
     <DashboardLayout activeTool={activeTool} onToolChange={setActiveTool}>
       {renderActiveTool()}
     </DashboardLayout>
+  )
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={
+      <div className="h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-600 border-t-transparent mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading your dashboard...</p>
+        </div>
+      </div>
+    }>
+      <DashboardContent />
+    </Suspense>
   )
 }
