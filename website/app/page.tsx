@@ -1,6 +1,37 @@
 import Link from 'next/link'
 import { Calculator, FileText, DollarSign, CheckCircle, ArrowRight, Star, Shield, Clock } from 'lucide-react'
 import { AIVoiceBanner } from '@/components/AIVoiceBanner'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'House Flipping Guide | Start Your First Flip With Confidence | TheHomeFlipping.com',
+  description: 'Complete house flipping toolkit for beginners. Get professional calculators, checklists, and guides to analyze deals, estimate rehab costs, and avoid costly mistakes. Start flipping houses today!',
+  keywords: 'house flipping guide, how to start house flipping, house flipping for beginners, real estate investing, flip calculator, ARV calculator, rehab cost estimator, wholesaling guide, first house flip',
+  openGraph: {
+    title: 'House Flipping Guide - Start Your First Flip With Confidence',
+    description: 'Complete house flipping toolkit for beginners. Professional calculators, checklists, and guides to help you analyze deals and avoid costly mistakes.',
+    url: 'https://thehomeflipping.com',
+    siteName: 'TheHomeFlipping.com',
+    type: 'website',
+    images: [
+      {
+        url: 'https://thehomeflipping.com/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'House Flipping Toolkit - TheHomeFlipping.com'
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'House Flipping Guide - Start Your First Flip With Confidence',
+    description: 'Complete house flipping toolkit for beginners. Professional calculators, checklists, and guides.',
+    images: ['https://thehomeflipping.com/og-image.jpg']
+  },
+  alternates: {
+    canonical: 'https://thehomeflipping.com'
+  }
+}
 
 const features = [
   {
@@ -72,8 +103,56 @@ const testimonials = [
 ]
 
 export default function HomePage() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "First Flip Starter Kit",
+    "description": "Complete house flipping toolkit for beginners. Professional calculators, checklists, and guides to help you analyze deals and avoid costly mistakes.",
+    "brand": {
+      "@type": "Brand",
+      "name": "TheHomeFlipping.com"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "67",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "TheHomeFlipping.com",
+        "url": "https://thehomeflipping.com"
+      }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "500",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Marcus T."
+        },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5"
+        },
+        "reviewBody": "The spreadsheets alone saved me from a $30,000 mistake on my first flip. Worth every penny."
+      }
+    ]
+  }
+
   return (
-    <div className="bg-white">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <div className="bg-white">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700 text-white overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
@@ -348,5 +427,6 @@ export default function HomePage() {
         </div>
       </section>
     </div>
+  </>
   )
 }

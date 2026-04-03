@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thehomeflipping.com/sitemap.xml
+
+# Block common non-content paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /dashboard/
