@@ -14,15 +14,17 @@ export async function POST(request: NextRequest) {
     console.log('Stripe client created')
     
     // Test 2: Basic API call - get account info
+    let account: { id: string; country?: string | null } | null = null
     try {
-      const account = await stripe.accounts.retrieve()
+      const retrieved = await stripe.accounts.retrieve()
+      account = { id: retrieved.id, country: retrieved.country }
       console.log('Stripe account ID:', account.id)
       console.log('Stripe account country:', account.country)
     } catch (accountError: any) {
       console.error('Account retrieval failed:', accountError.message)
-      return NextResponse.json({ 
-        error: 'Stripe API connection failed', 
-        details: accountError.message 
+      return NextResponse.json({
+        error: 'Stripe API connection failed',
+        details: accountError.message
       }, { status: 500 })
     }
     
@@ -38,7 +40,7 @@ export async function POST(request: NextRequest) {
       const price = await stripe.prices.retrieve(priceId)
       console.log('Price found:', {
         id: price.id,
-        amount: price.amount,
+        amount: price.unit_amount,
         currency: price.currency,
         active: price.active,
         product: price.product
@@ -64,7 +66,7 @@ export async function POST(request: NextRequest) {
           account: { id: account.id, country: account.country },
           price: {
             id: price.id,
-            amount: price.amount,
+            amount: price.unit_amount,
             currency: price.currency,
             active: price.active
           },

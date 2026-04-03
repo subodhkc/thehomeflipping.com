@@ -17,6 +17,12 @@ export default function SellFastPage() {
     timeline: 'asap',
     askingPrice: '',
     additionalInfo: '',
+    reason: '',
+    bedrooms: '',
+    bathrooms: '',
+    squareFeet: '',
+    yearBuilt: '',
+    notes: '',
   })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
