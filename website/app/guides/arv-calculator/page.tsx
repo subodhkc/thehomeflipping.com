@@ -188,7 +188,7 @@ export default function ARVCalculatorGuidePage() {
               <li>Recent sales weigh more</li>
               <li>Similar properties weigh more</li>
               <li>Proximity matters</li>
-              <li>Same neighborhood > Adjacent</li>
+              <li>Same neighborhood {'>'} Adjacent</li>
             </ul>
             
             <h3>Statistical Analysis</h3>
