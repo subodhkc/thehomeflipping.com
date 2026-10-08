@@ -13,6 +13,7 @@ export interface DashboardUserData {
   purchaseDate: Date
   expiresAt: Date
   isValid: boolean
+  daysRemaining?: number
 }
 
 export interface ValidationResult {

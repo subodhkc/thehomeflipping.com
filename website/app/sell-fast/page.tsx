@@ -17,6 +17,12 @@ export default function SellFastPage() {
     timeline: 'asap',
     askingPrice: '',
     additionalInfo: '',
+    reason: '',
+    bedrooms: '',
+    bathrooms: '',
+    squareFeet: '',
+    yearBuilt: '',
+    notes: '',
     website: '', // honeypot — must stay empty for humans
   })
   const [formStartedAt, setFormStartedAt] = useState(0)

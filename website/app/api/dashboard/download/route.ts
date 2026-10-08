@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { NextRequest, NextResponse } from 'next/server'
 import { validateDashboardToken } from '@/lib/token'
 import fs from 'fs'
