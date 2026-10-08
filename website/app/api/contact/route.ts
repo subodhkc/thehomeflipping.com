@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { sendContactNotification, sendContactConfirmation } from '@/lib/contact-email'
-import { getClientIp, isRateLimited, isSuspiciousTiming, countUrls } from '@/lib/spam-protection'
+import { getClientIp, isAllowedCountry, isRateLimited, isSuspiciousTiming, countUrls } from '@/lib/spam-protection'
 
 // Return a fake success so bots can't tell they were filtered and don't adapt/retry.
 function fakeSuccess() {
@@ -22,6 +22,14 @@ const MAX_LENGTHS: Record<string, number> = {
 
 export async function POST(request: NextRequest) {
   try {
+    // US-only: business serves US customers exclusively.
+    if (!isAllowedCountry(request)) {
+      return NextResponse.json(
+        { error: 'Submissions are only accepted from the United States.' },
+        { status: 403 }
+      )
+    }
+
     const ip = getClientIp(request)
     if (isRateLimited(ip)) {
       return NextResponse.json(

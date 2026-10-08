@@ -4,14 +4,26 @@ import { NextRequest } from 'next/server'
 // Note: on serverless (Vercel) this applies per warm function instance, so it
 // is not a globally consistent limit — but it still absorbs bursts and repeated
 // hits against the same instance. For a hard global limit, add Upstash Redis.
-const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000 // 10 minutes
-const RATE_LIMIT_MAX = 5
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000 // 60 minutes
+const RATE_LIMIT_MAX = 1
 const submissions = new Map<string, number[]>()
 
 export function getClientIp(request: NextRequest): string {
   const forwarded = request.headers.get('x-forwarded-for')
   if (forwarded) return forwarded.split(',')[0].trim()
   return request.headers.get('x-real-ip') ?? 'unknown'
+}
+
+// Vercel sets x-vercel-ip-country on every request at the edge. When the
+// header is absent (local dev, non-Vercel preview) we allow the request.
+export function getClientCountry(request: NextRequest): string | null {
+  return request.headers.get('x-vercel-ip-country')
+}
+
+export function isAllowedCountry(request: NextRequest): boolean {
+  const country = getClientCountry(request)
+  if (country === null) return true
+  return country === 'US'
 }
 
 export function isRateLimited(ip: string): boolean {
