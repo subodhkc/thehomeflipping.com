@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Home, Clock, DollarSign, CheckCircle, Phone, Mail, MapPin, ArrowRight } from 'lucide-react'
 
 export default function SellFastPage() {
@@ -17,10 +17,16 @@ export default function SellFastPage() {
     timeline: 'asap',
     askingPrice: '',
     additionalInfo: '',
+    website: '', // honeypot — must stay empty for humans
   })
+  const [formStartedAt, setFormStartedAt] = useState(0)
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    setFormStartedAt(Date.now())
+  }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -43,7 +49,9 @@ export default function SellFastPage() {
           email: formData.email,
           phone: formData.phone,
           subject: 'Sell Fast Property Inquiry',
-          message: `Property Address: ${formData.address}\nCity: ${formData.city}\nState: ${formData.state}\nZip: ${formData.zip}\nAsking Price: ${formData.askingPrice}\nReason for Selling: ${formData.reason}\nProperty Type: ${formData.propertyType}\nBedrooms: ${formData.bedrooms}\nBathrooms: ${formData.bathrooms}\nSquare Feet: ${formData.squareFeet}\nYear Built: ${formData.yearBuilt}\nCondition: ${formData.condition}\nNotes: ${formData.notes}`
+          website: formData.website,
+          formStartedAt,
+          message: `Property Address: ${formData.address}\nCity: ${formData.city}\nState: ${formData.state}\nZip: ${formData.zip}\nAsking Price: ${formData.askingPrice}\nProperty Type: ${formData.propertyType}\nCondition: ${formData.condition}\nTimeline: ${formData.timeline}\nAdditional Info: ${formData.additionalInfo}`
         })
       })
       
@@ -395,6 +403,20 @@ export default function SellFastPage() {
                       className="input-field"
                     />
                   </div>
+                </div>
+
+                {/* Honeypot field — hidden from humans, bots fill it in */}
+                <div style={{ position: 'absolute', left: '-9999px', top: '-9999px' }} aria-hidden="true">
+                  <label htmlFor="website">Website</label>
+                  <input
+                    type="text"
+                    id="website"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={formData.website}
+                    onChange={handleChange}
+                  />
                 </div>
 
                 <div className="pt-6 border-t">

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Metadata } from 'next'
 import { Mail, Phone, MapPin, Clock } from 'lucide-react'
 
@@ -9,28 +9,40 @@ export default function ContactPage() {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
+    website: '' // honeypot — must stay empty for humans
   })
+  const [formStartedAt, setFormStartedAt] = useState(0)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    setFormStartedAt(Date.now())
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError(null)
     
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, formStartedAt })
       })
       
       if (response.ok) {
         setSubmitted(true)
-        setFormData({ name: '', email: '', subject: '', message: '' })
+        setFormData({ name: '', email: '', subject: '', message: '', website: '' })
+      } else {
+        const data = await response.json().catch(() => null)
+        setError(data?.error || 'Failed to send message. Please try again.')
       }
     } catch (error) {
       console.error('Error submitting form:', error)
+      setError('Failed to send message. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
@@ -188,6 +200,20 @@ export default function ContactPage() {
                   />
                 </div>
                 
+                {/* Honeypot field — hidden from humans, bots fill it in */}
+                <div style={{ position: 'absolute', left: '-9999px', top: '-9999px' }} aria-hidden="true">
+                  <label htmlFor="website">Website</label>
+                  <input
+                    type="text"
+                    id="website"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={formData.website}
+                    onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                  />
+                </div>
+
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -195,6 +221,9 @@ export default function ContactPage() {
                 >
                   {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
+                {error && (
+                  <p className="text-red-500 text-sm mt-2">{error}</p>
+                )}
               </form>
               
               <p className="text-sm text-gray-500 mt-4 text-center">

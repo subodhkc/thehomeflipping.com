@@ -14,8 +14,10 @@ export async function POST(request: NextRequest) {
     console.log('Stripe client created')
     
     // Test 2: Basic API call - get account info
+    let accountInfo: { id: string; country?: string } | null = null
     try {
       const account = await stripe.accounts.retrieve()
+      accountInfo = { id: account.id, country: account.country }
       console.log('Stripe account ID:', account.id)
       console.log('Stripe account country:', account.country)
     } catch (accountError: any) {
@@ -38,7 +40,7 @@ export async function POST(request: NextRequest) {
       const price = await stripe.prices.retrieve(priceId)
       console.log('Price found:', {
         id: price.id,
-        amount: price.amount,
+        amount: price.unit_amount,
         currency: price.currency,
         active: price.active,
         product: price.product
@@ -61,10 +63,10 @@ export async function POST(request: NextRequest) {
         
         return NextResponse.json({
           success: true,
-          account: { id: account.id, country: account.country },
+          account: accountInfo,
           price: {
             id: price.id,
-            amount: price.amount,
+            amount: price.unit_amount,
             currency: price.currency,
             active: price.active
           },

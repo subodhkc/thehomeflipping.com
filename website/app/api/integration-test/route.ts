@@ -27,7 +27,9 @@ export async function GET(request: NextRequest) {
         dashboardDataLoaded: !!dashboardData?.data,
         dashboardUrl: dashboardUrl,
         userEmail: email,
-        userDaysRemaining: validation.userData?.daysRemaining,
+        userDaysRemaining: validation.userData
+          ? Math.ceil((validation.userData.expiresAt.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+          : undefined,
         productCount: dashboardData?.data?.summary?.totalFiles || 0
       },
       message: validation.valid && dashboardResponse.ok 

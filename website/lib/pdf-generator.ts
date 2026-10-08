@@ -96,7 +96,7 @@ export async function generatePDFFromMarkdown(markdown: string, title: string): 
       }
     })
     
-    return pdf
+    return Buffer.from(pdf)
   } finally {
     await browser.close()
   }
@@ -114,7 +114,7 @@ function markdownToHtml(markdown: string): string {
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
     // Lists
     .replace(/^\* (.+)/gim, '<li>$1</li>')
-    .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+    .replace(/(<li>[\s\S]*<\/li>)/, '<ul>$1</ul>')
     .replace(/^\d+\. (.+)/gim, '<li>$1</li>')
     // Blockquotes
     .replace(/^> (.+)/gim, '<blockquote>$1</blockquote>')

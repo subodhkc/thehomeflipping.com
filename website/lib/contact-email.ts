@@ -1,4 +1,5 @@
 import { Resend } from 'resend'
+import { escapeHtml } from '@/lib/spam-protection'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -8,16 +9,25 @@ interface SendContactEmailParams {
   email: string
   phone?: string
   message: string
+  subject?: string
   propertyType?: string
   address?: string
 }
 
-export async function sendContactNotification({ to, name, email, phone, message, propertyType, address }: SendContactEmailParams) {
+export async function sendContactNotification({ to, name, email, phone, message, subject, propertyType, address }: SendContactEmailParams) {
+  const safeName = escapeHtml(name)
+  const safeEmail = escapeHtml(email)
+  const safePhone = phone ? escapeHtml(phone) : undefined
+  const safeSubject = subject ? escapeHtml(subject) : undefined
+  const safePropertyType = propertyType ? escapeHtml(propertyType) : undefined
+  const safeAddress = address ? escapeHtml(address) : undefined
+  const safeMessage = escapeHtml(message)
+
   try {
     const { data, error } = await resend.emails.send({
       from: `TheHomeFlipping.com <${process.env.FROM_EMAIL!}>`,
       to: [process.env.FROM_EMAIL!], // Send to admin
-      subject: `New Contact Form Submission - ${name}`,
+      subject: `New Contact Form Submission - ${name.replace(/[\r\n]+/g, ' ').slice(0, 100)}`,
       html: `
         <!DOCTYPE html>
         <html>
@@ -43,34 +53,40 @@ export async function sendContactNotification({ to, name, email, phone, message,
             
             <div class="content">
               <div class="field">
-                <span class="label">Name:</span> ${name}
+                <span class="label">Name:</span> ${safeName}
               </div>
               
               <div class="field">
-                <span class="label">Email:</span> ${email}
+                <span class="label">Email:</span> ${safeEmail}
               </div>
               
-              ${phone ? `
+              ${safeSubject ? `
               <div class="field">
-                <span class="label">Phone:</span> ${phone}
-              </div>
-              ` : ''}
-              
-              ${propertyType ? `
-              <div class="field">
-                <span class="label">Property Type:</span> ${propertyType}
+                <span class="label">Subject:</span> ${safeSubject}
               </div>
               ` : ''}
               
-              ${address ? `
+              ${safePhone ? `
               <div class="field">
-                <span class="label">Property Address:</span> ${address}
+                <span class="label">Phone:</span> ${safePhone}
+              </div>
+              ` : ''}
+              
+              ${safePropertyType ? `
+              <div class="field">
+                <span class="label">Property Type:</span> ${safePropertyType}
+              </div>
+              ` : ''}
+              
+              ${safeAddress ? `
+              <div class="field">
+                <span class="label">Property Address:</span> ${safeAddress}
               </div>
               ` : ''}
               
               <div class="field">
                 <span class="label">Message:</span><br>
-                ${message.replace(/\n/g, '<br>')}
+                ${safeMessage.replace(/\n/g, '<br>')}
               </div>
               
               <p><strong>Next Steps:</strong></p>
@@ -105,6 +121,8 @@ export async function sendContactNotification({ to, name, email, phone, message,
 }
 
 export async function sendContactConfirmation({ to, name }: { to: string; name: string }) {
+  const safeName = escapeHtml(name)
+
   try {
     const { data, error } = await resend.emails.send({
       from: `TheHomeFlipping.com <${process.env.FROM_EMAIL!}>`,
@@ -132,7 +150,7 @@ export async function sendContactConfirmation({ to, name }: { to: string; name: 
             </div>
             
             <div class="content">
-              <p>Hi ${name},</p>
+              <p>Hi ${safeName},</p>
               <p>Thank you for reaching out to TheHomeFlipping.com. We have received your message and will get back to you within 24 hours.</p>
               
               <p><strong>What happens next:</strong></p>
